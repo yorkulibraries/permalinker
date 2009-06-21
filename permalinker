@@ -1,0 +1,170 @@
+#!/usr/bin/perl -w
+
+# Make safe York permalinks for articles and things.
+# Given a URL, make an educated guess about whether or not it
+# is going through EZProxy and, if not, how to make it do so.
+#
+# Result: Easier article permalinking.
+#
+# William Denton <wdenton@yorku.ca>
+# February - June 2009
+
+# Copyright (c) 2009 William Denton
+#
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation
+# files (the "Software"), to deal in the Software without
+# restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following
+# conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+
+use strict;
+
+use CGI qw/:standard/;
+use LWP::Simple qw(!head); # See CAVEAT in perldoc LWP::Simple
+use YAML;
+
+my $templateConfig = '/var/www/cgi-bin/template.yml';
+
+# TODO Catch errors here.
+my $template    = YAML::LoadFile($templateConfig);
+my $permalinker = YAML::LoadFile($$template{'configFilePath'}.$$template{'permalinkerConfig'});
+
+# Note that ? needs to be escaped to work in the regex.
+# We'll unescape it later.
+my $ezproxyURL       = 'http://' . $$permalinker{'ezproxy'} . '/login\?url=';
+
+my $query = new CGI;
+
+my $urlToPermify = param('url') || "";
+my $permalink = '';
+my $message = '';
+
+print header;
+print $$template{'head_start'};
+print $$permalinker{'permalinkerCSS'};
+print "<title>$$permalinker{'title'}</title>\n";
+print $$template{'head_end'};
+
+my $headerHTML = get $$template{'headerURL'};
+unless (defined $headerHTML) {
+    print "<p>Error retrieving $$template{'headerURL'}; exiting</p>\n";
+    die "Error retrieving $$template{'headerURL'}";
+}
+print $headerHTML;
+
+my $mainContent_start = $$template{'mainContent_start'};
+$mainContent_start =~ s/::LEFT_NAV::/$$permalinker{'leftnav'}/;
+$mainContent_start =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
+print $mainContent_start;
+print qq(<h1>$$permalinker{'h1'}</h1>\n);
+print p($$permalinker{'introMsg'});
+print p($$permalinker{'testingMsg'});
+print qq(<div class="permalink-box">\n);
+
+# !!! Could put the form into permalinker.yml.
+print start_form(-method=>"GET", -action=>$$permalinker{'permalinkerURL'}),
+   ('URL: ',
+   textfield(-size => 40, -name=>'url'));
+print qq(<input type="submit" value="Make a safe York permalink">);
+print end_form;
+
+if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
+
+    # E.g. http://dx.doi.org.ezproxy.library.yorku.ca/10.1016/j.jelekin.2007.04.002
+    $message = $$permalinker{'ezProxiedAlready'};
+    $permalink = $urlToPermify;
+
+} elsif ($urlToPermify =~ /^$ezproxyURL/) {
+
+    # E.g. http://ezproxy.library.york.ca/login?url=http://www.jstor.org/
+    $message = $$permalinker{'ezProxyMsg'};
+    $permalink = $urlToPermify;
+
+} elsif ($urlToPermify =~ /^$$permalinker{'eresolverURL'}/) {
+
+    # E.g. http://www.library.yorku.ca/eresolver/?id=50
+    $message = $$permalinker{'eresolverMsg'};
+    $permalink = $urlToPermify;
+
+} elsif ($urlToPermify =~ m|(doi:)*(\d+\.\d+)/([\d\w\.]*)|) {
+
+    # It's a DOI, with or without the doi: prefix
+    $message = $$permalinker{'doiMsg'};
+    $urlToPermify =~ s/^doi://;
+    $permalink = $ezproxyURL . "http://dx.doi.org/" . $urlToPermify;
+
+} elsif ($urlToPermify eq "") {
+
+    $permalink = "";
+
+} else {
+
+    $message = $$permalinker{'proxyMsg'};
+    $permalink = $ezproxyURL . $urlToPermify;
+
+}
+
+if ($permalink) {
+
+    $permalink =~ s|\\\?|\?|; # Unescape the ?.
+    print p($message);
+    print qq(<div class="permalink-generated"><a href="$permalink">$permalink</a> </div>);
+
+}
+
+# Check to see if there's any special help information for this
+# vendor.
+# TODO Make elegant.
+foreach my $vendor (keys %{$permalinker}) {
+
+    if ($urlToPermify =~ m/$vendor/i) {
+	print "<p>\n";
+	if ($$permalinker{$vendor}{'helpUrl'}) {
+	    print qq(This is a $$permalinker{$vendor}{'name'} link. );
+	    print qq(We have <a href="$$permalinker{$vendor}{'helpUrl'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
+	}
+	print "</p>\n";
+    }
+
+}
+
+print "</div>\n";
+
+# TODO Also make this elegant.  Two loops! Should be just one.
+foreach my $vendor (keys %{$permalinker}) {
+
+    if ($urlToPermify =~ m/$vendor/i) {
+	print "<p>\n";
+	if ($$permalinker{$vendor}{'helpImageUrl'}) {
+	    print qq(Here's an example: </p> <p> <img src="$$permalinker{$vendor}{'helpImageUrl'}" />);
+	}
+	print "</p>\n";
+    }
+
+}
+
+print $$template{'mainContent_end'};
+
+my $footerHTML = get $$template{'footerURL'};
+unless (defined $footerHTML) {
+    print "<p>Error retrieving $$template{'footerURL'}</p>\n";
+    die "Error retrieving $$template{'footerURL'}";
+}
+print $footerHTML;
+
+print $$template{'body_end'};

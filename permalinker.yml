@@ -1,0 +1,176 @@
+# Permalinker config file.
+
+permalinkerURL: /cgi-bin/permalinker
+title: Make a Safe York Permalink
+h1: Make a Safe York Permalink
+
+# Insert right after head_start
+permalinkerCSS: |
+  <style type="text/css">
+  div.permalink-box {
+  margin: 0 5em 0 5em;
+  border: 1px solid black;
+  padding: 1em;
+  }
+  div.permalink-generated {
+  margin: auto;
+  overflow: auto;
+  text-align: center;
+  }
+  </style> 
+
+ezproxy: ezproxy.library.yorku.ca
+eresolverURL: http://www.library.yorku.ca/eresolver/\?id=
+
+leftnav: | 
+  <p> <img width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/Catalogue/index.htm">CATALOGUE</a><br
+  /> <img width="170" vspace="1" hspace="0" height="1" border="0"
+  align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
+  width="5" hspace="2" height="9" border="0" alt="small arrow image"
+  src="http://www.library.yorku.ca/assets/arrow.gif" /> <a
+  class="anavitem"
+  href="http://www.library.yorku.ca/ccm/Home/eResources/index.htm">eRESOURCES</a><br
+  /> <img width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/eResources/FindBySubject.htm">Find
+  by Subject</a><br /> <img width="5" hspace="2" height="9" border="0"
+  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/eResources/FindByTitle.htm">Find
+  by Title</a><br /> <img width="5" hspace="2" height="9" border="0"
+  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/eResources/RemoteAccess.htm">Remote
+  Access</a><br /> <img width="5" hspace="2" height="9" border="0"
+  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/cgi-bin/permalinker">Permalinks</a><img width="170" vspace="1" hspace="0" height="1"
+  border="0" align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /><img width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/Services/index.htm">SERVICES</a><br
+  /> <img width="170" vspace="1" hspace="0" height="1" border="0"
+  align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/ResearchAndInstruction/index.htm">HELP
+  WITH RESEARCH</a><br /> <img width="170" vspace="1" hspace="0"
+  height="1" border="0" align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/Hours/index.htm">LIBRARY
+  HOURS</a><br /> <img width="170" vspace="1" hspace="0" height="1"
+  border="0" align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
+  width="5" hspace="2" height="9" border="0" alt=""
+  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
+  class="navitem"
+  href="http://www.library.yorku.ca/ccm/Home/About/index.htm">YORK
+  LIBRARIES</a><br /> <img width="170" vspace="1" hspace="0"
+  height="1" border="0" align="top" alt=""
+  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /></p><a
+  href="/ccm/Home/VirtualReference/askalibrarian.htm"><img border="0"
+  alt="Ask A Librarian" src="/assets/askalibrarian.gif"/></a>
+
+breadcrumbs: |
+  <a href="/">York University Libraries</a> &gt;
+  <a href="/ccm/Home/eResources/">eResources</a> &gt;
+  Permalinks
+
+introMsg: |
+  <p>
+  When you link to an article you want a <acronym title="Uniform Resource Locator">URL</acronym> that 
+  will always work. That's called a
+  <b>permalink</b> (or persistent or stable link). For things on
+  the public web, this usually isn't a problem.  For journal articles
+  and other things the library pays for, it can be a bit more
+  complicated.
+  </p>
+  <ul>
+  <li> <a href="http://www.library.yorku.ca/ccm/Home/eResources/permalinks">Where to look for permalinks</a>
+  </li>
+  <li> <a
+  href="http://www.library.yorku.ca/ccm/Steacie/permanent-links/how-to-obtain-a-permanent-link">How
+  to find permalinks</a>
+  </li>
+  <li> <a
+  href="http://www.library.yorku.ca/ccm/Steacie/permanent-links/publishers-link.en">Examples
+  of where to look for permalinks in journals and article
+  databases</a> </li>
+  </ul>  
+  <p>
+  Once you have a permalink, you need to make sure that York people
+  have full access to it, even when they're off campus. Copy the
+  permalink URL into the box and we'll make it a safe York permalink
+  that will work for all York people from anywhere.
+  </p>
+
+testingMsg: |
+  <div class="permalink-box">
+  <p>
+  Thanks for testing this. Try these:
+  </p>
+  <ul>
+  <li> doi:10.1016/j.jelekin.2007.04.002</li>
+  <li> 10.1016/j.jelekin.2007.04.002 </li>
+  <li> http://dx.doi.org.ezproxy.library.yorku.ca/10.1016/j.jelekin.2007.04.002 </li>
+  <li> http://www.library.yorku.ca/eresolver/?id=50 </li>
+  <li> http://ezproxy.library.york.ca/login?url=http://www.jstor.org/</li>
+  <li> http://www.jstor.org/stable/1088298
+  <li> http://proquest.umi.com.ezproxy.library.yorku.ca/pqdweb?did=1625721201&amp;sid=2&amp;Fmt=2&amp;clientId=5220&amp;RQT=309&amp;VName=PQD</li>
+  <li> [nothing; just submit a blank form]
+  </ul>
+  </div>
+  <br />
+
+ezProxiedAlready: >
+  This URL goes through our proxy server, so it should be OK as it is.
+
+ezProxyMsg: >
+  This URL goes through the Passport York authentification, so it looks good as it is.
+
+eresolverMsg: >
+  This York eresolver URL should be OK as it is.
+
+doiMsg: > 
+  I think this is a <acronym title="Digital Object Identifier">DOI</acronym>. Try this permalink:
+
+proxyMsg: >
+  I think you need to run this through the proxy. Try this as the
+  permalink:
+
+# Special help information by vendor.
+# The section heading will be used for a pattern match, so it needs
+# to match something unique in the URL that can be used to identify
+# the provider.
+
+proquest.umi.com:
+  # http://proquest.umi.com.ezproxy.library.yorku.ca/pqdweb?did=1625721201&sid=2&Fmt=2&clientId=5220&RQT=309&VName=PQD
+  name: ProQuest
+  helpUrl: http://www.library.yorku.ca/ccm/Steacie/permanent-links/publishers-link#proquest
+  helpImageUrl: http://www.library.yorku.ca/ccm/cms-service/stream/image/?image_id=6212708
+
+jstor.org:
+  # http://www.jstor.org/stable/1088298
+  name: JSTOR
+  helpUrl: http://www.library.yorku.ca/ccm/Steacie/permanent-links/publishers-link#JSTOR
+  helpImageUrl: 
+

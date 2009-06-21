@@ -1,0 +1,53 @@
+# York University Libraries web site templates
+
+# Paths to CGI config files.
+configFilePath: /var/www/cgi-bin/
+permalinkerConfig: permalinker.yml
+
+# Standard header and footer of pages.  Grab and insert content into
+# your own pages.
+headerURL: http://www.library.yorku.ca/online/header.php
+footerURL: http://www.library.yorku.ca/online/footer.php
+
+# General structure of a page:
+#
+# insert: headerURL content
+# head_start
+# (<title> goes here)
+# head_end
+# mainContent_start (s/::LEFT_NAV::/ and s/::BREADCRUMBS::/)
+# (content is here)
+# mainContent_end
+# insert: footer_URL content
+# body_end
+
+head_start: |
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <base href="http://www.library.yorku.ca" />
+  <link rel="stylesheet" type="text/css" href="/template/css/yorku.css">
+  <link rel="stylesheet" type="text/css" href="/template/css/simple/navigation.css">
+  <link rel="stylesheet" type="text/css" href="/template/css/simple/eres.css">
+  <link rel="stylesheet" type="text/css" href="/template/css/simple/styles.css">
+  <link rel="stylesheet" type="text/css" href="/template/css/simple/2-column_left.css">
+  <script src="/javascript/jquery.js" type="text/javascript"></script>
+  <script src="/javascript/rss.js" type="text/javascript"></script>
+
+head_end: |
+  </head>
+  <body>
+  <div id="container">
+  <div id="banner">
+
+mainContent_start: |
+  <div id="mainContent">
+  <div class="left">
+  ::LEFT_NAV::
+  </div>
+  <div class="center">
+  <div class="breadcrums">::BREADCRUMBS::</div>
+
+mainContent_end: |
+  </div>
+
+body_end: </body></html>

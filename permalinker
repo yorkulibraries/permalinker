@@ -101,7 +101,7 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
     $message = $$permalinker{'eresolverMsg'};
     $permalink = $urlToPermify;
 
-} elsif ($urlToPermify =~ m|(doi:[ ])*(\d+\.\d+)/([\d\w\.]*)|i) {
+} elsif ($urlToPermify =~ m|^(doi:\s*)(\d+\.\d+)/([\d\w\.]*)|i) {
 
     # It's a DOI, with or without the doi: prefix
     $message = $$permalinker{'doiMsg'};

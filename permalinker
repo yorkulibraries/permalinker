@@ -73,7 +73,7 @@ $mainContent_start =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
 print $mainContent_start;
 print qq(<h1>$$permalinker{'h1'}</h1>\n);
 print p($$permalinker{'introMsg'});
-print p($$permalinker{'testingMsg'});
+# print p($$permalinker{'testingMsg'});
 print qq(<div class="permalink-box">\n);
 
 # !!! Could put the form into permalinker.yml.
@@ -101,12 +101,21 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
     $message = $$permalinker{'eresolverMsg'};
     $permalink = $urlToPermify;
 
-} elsif ($urlToPermify =~ m|(doi:)*(\d+\.\d+)/([\d\w\.]*)|) {
+} elsif ($urlToPermify =~ m|(doi:[ ])*(\d+\.\d+)/([\d\w\.]*)|i) {
 
     # It's a DOI, with or without the doi: prefix
     $message = $$permalinker{'doiMsg'};
-    $urlToPermify =~ s/^doi://;
-    $permalink = $ezproxyURL . "http://dx.doi.org/" . $urlToPermify;
+    $urlToPermify =~ s/^doi:[ ]//;
+    $urlToPermify = "http://dx.doi.org/" . $urlToPermify;
+    $permalink = $ezproxyURL . $urlToPermify;
+
+} elsif ($urlToPermify =~ m|(pmid:[ ])(\d+)|i) {
+
+    # It's a PMID
+    $message = $$permalinker{'pmidMsg'};
+    $urlToPermify =~ s/^pmid:[ ]//;
+    $urlToPermify = "http://www.ncbi.nlm.nih.gov/pubmed/" . $urlToPermify;
+    $permalink = $ezproxyURL . $urlToPermify;
 
 } elsif ($urlToPermify eq "") {
 
@@ -132,11 +141,11 @@ if ($permalink) {
 # TODO Make elegant.
 foreach my $vendor (keys %{$permalinker}) {
 
-    if ($urlToPermify =~ m/$vendor/i) {
+    if ($urlToPermify =~ m|$vendor|i) {
 	print "<p>\n";
-	if ($$permalinker{$vendor}{'helpUrl'}) {
+	if ($$permalinker{$vendor}{'helpAnchor'}) {
 	    print qq(This is a $$permalinker{$vendor}{'name'} link. );
-	    print qq(We have <a href="$$permalinker{$vendor}{'helpUrl'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
+	    print qq(We have <a href="$$permalinker{'helpUrl'}#$$permalinker{$vendor}{'helpAnchor'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
 	}
 	print "</p>\n";
     }
@@ -144,19 +153,6 @@ foreach my $vendor (keys %{$permalinker}) {
 }
 
 print "</div>\n";
-
-# TODO Also make this elegant.  Two loops! Should be just one.
-foreach my $vendor (keys %{$permalinker}) {
-
-    if ($urlToPermify =~ m/$vendor/i) {
-	print "<p>\n";
-	if ($$permalinker{$vendor}{'helpImageUrl'}) {
-	    print qq(Here's an example: </p> <p> <img src="$$permalinker{$vendor}{'helpImageUrl'}" />);
-	}
-	print "</p>\n";
-    }
-
-}
 
 print $$template{'mainContent_end'};
 

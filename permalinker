@@ -101,11 +101,12 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
     $message = $$permalinker{'eresolverMsg'};
     $permalink = $urlToPermify;
 
-} elsif ($urlToPermify =~ m|^(doi:\s*)(\d+\.\d+)/([\d\w\.]*)|i) {
+#} elsif ($urlToPermify =~ m|^(doi:\s*)(\d+\.\d+)/([\d\w\.]*)|i) {
+} elsif ($urlToPermify =~ m|^(\d+\.\d+)/([\d\w\.]*)|i) {
 
     # It's a DOI, with or without the doi: prefix
     $message = $$permalinker{'doiMsg'};
-    $urlToPermify =~ s/^doi:[ ]//;
+    $urlToPermify =~ s/^doi:[ ]//i;
     $urlToPermify = "http://dx.doi.org/" . $urlToPermify;
     $permalink = $ezproxyURL . $urlToPermify;
 
@@ -113,7 +114,7 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
 
     # It's a PMID
     $message = $$permalinker{'pmidMsg'};
-    $urlToPermify =~ s/^pmid:[ ]//;
+    $urlToPermify =~ s/^pmid:[ ]//i;
     $urlToPermify = "http://www.ncbi.nlm.nih.gov/pubmed/" . $urlToPermify;
     $permalink = $ezproxyURL . $urlToPermify;
 

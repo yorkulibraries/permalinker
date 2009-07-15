@@ -7,7 +7,7 @@
 # Result: Easier article permalinking.
 #
 # William Denton <wdenton@yorku.ca>
-# February - June 2009
+# February - July 2009
 
 # Copyright (c) 2009 William Denton
 #
@@ -101,20 +101,24 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
     $message = $$permalinker{'eresolverMsg'};
     $permalink = $urlToPermify;
 
-#} elsif ($urlToPermify =~ m|^(doi:\s*)(\d+\.\d+)/([\d\w\.]*)|i) {
-} elsif ($urlToPermify =~ m|^(\d+\.\d+)/([\d\w\.]*)|i) {
+} elsif ($urlToPermify =~ m|^(doi:\s*)?(\d+\.\d+)/([\d\w\.]*)|i) {
 
     # It's a DOI, with or without the doi: prefix
+    # E.g. doi: 10.1038/nature02999
+    # or   doi:10.1038/nature02999
+    # or   10.1038/nature02999
     $message = $$permalinker{'doiMsg'};
-    $urlToPermify =~ s/^doi:[ ]//i;
+    $urlToPermify =~ s/^doi:\s*//i;
     $urlToPermify = "http://dx.doi.org/" . $urlToPermify;
     $permalink = $ezproxyURL . $urlToPermify;
 
-} elsif ($urlToPermify =~ m|(pmid:[ ])(\d+)|i) {
+} elsif ($urlToPermify =~ m|(pmid:\s*)(\d+)|i) {
 
-    # It's a PMID
+    # It's a PMID.  Recognize it by the PMID prefix, otherwise it's
+    # just a number.
+    # E.g. PMID: 1
     $message = $$permalinker{'pmidMsg'};
-    $urlToPermify =~ s/^pmid:[ ]//i;
+    $urlToPermify =~ s/^pmid:\s*//i;
     $urlToPermify = "http://www.ncbi.nlm.nih.gov/pubmed/" . $urlToPermify;
     $permalink = $ezproxyURL . $urlToPermify;
 

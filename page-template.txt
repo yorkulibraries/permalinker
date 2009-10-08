@@ -40,7 +40,7 @@
 <div id="nav_area"><!-- begin menu -->
 <div id="navlist" class="flyout">
 <h2><a href="http://www.library.yorku.ca/">York University Libraries</a></h2>
-::LEFT_NAV:::
+::LEFT_NAV::
 </div>
 <!-- end menu --></div>
 

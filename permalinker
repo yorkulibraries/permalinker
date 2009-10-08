@@ -179,7 +179,7 @@ foreach my $vendor (keys %{$permalinker}) {
 
 $mainContent .=  "</div>\n";
 
-$html =~ s/::MAIN_CONTENT::/-------- $mainContent --------/;
+$html =~ s/::MAIN_CONTENT::/$mainContent/;
 
 print $html;
 

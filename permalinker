@@ -48,6 +48,45 @@ my $permalinker = YAML::LoadFile($$template{'configFilePath'}.$$template{'permal
 # We'll unescape it later.
 my $ezproxyURL       = 'http://' . $$permalinker{'ezproxy'} . '/login\?url=';
 
+my ($file, $insert);
+
+$file = $$template{'templatesPath'}.$$template{'pageTemplate'};
+open FILE, $file or die "Cannot read $file: $!\n";
+local $/; # Slurp it all up.
+my $html = <FILE>;
+close FILE;
+
+$file = $$template{'templatesPath'}.$$template{'internalbanner'};
+open FILE, $file or die "Cannot read $file: $!\n";
+#local $/; # Slurp it all up.
+$insert = <FILE>;
+$html =~ s/::INTERNALBANNER.INC::/$insert/;
+close FILE;
+
+$file = $$template{'templatesPath'}.$$template{'graphicalheader'};
+open FILE, $file or die "Cannot read $file: $!\n";
+#local $/; # Slurp it all up.
+$insert = <FILE>;
+$html =~ s/::GRAPHICALHEADER.INC::/$insert/;
+close FILE;
+
+$file = $$template{'templatesPath'}.$$template{'footerwide'};
+open FILE, $file or die "Cannot read $file: $!\n";
+#local $/; # Slurp it all up.
+$insert = <FILE>;
+$html =~ s/::FOOTERWIDE.INC::/$insert/;
+close FILE;
+
+$file = $$template{'templatesPath'}.$$template{'googleanalytics'};
+open FILE, $file or die "Cannot read $file: $!\n";
+#local $/; # Slurp it all up.
+$insert = <FILE>;
+$html =~ s/::GOOGLEANALYTICS.INC::/$insert/;
+close FILE;
+
+$html =~ s/::PAGE_TITLE::/$$permalinker{'title'}/;
+$html =~ s/::LEFT_NAV::/$$permalinker{'leftnav'}/;
+
 my $query = new CGI;
 
 my $urlToPermify = param('url') || "";
@@ -55,33 +94,14 @@ my $permalink = '';
 my $message = '';
 
 print header;
-print $$template{'head_start'};
-print $$permalinker{'permalinkerCSS'};
-print "<title>$$permalinker{'title'}</title>\n";
-print $$template{'head_end'};
 
-my $headerHTML = get $$template{'headerURL'};
-unless (defined $headerHTML) {
-    print "<p>Error retrieving $$template{'headerURL'}; exiting</p>\n";
-    die "Error retrieving $$template{'headerURL'}";
-}
-print $headerHTML;
+my $mainContent = "";
 
-my $mainContent_start = $$template{'mainContent_start'};
-$mainContent_start =~ s/::LEFT_NAV::/$$permalinker{'leftnav'}/;
-$mainContent_start =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
-print $mainContent_start;
-print qq(<h1>$$permalinker{'h1'}</h1>\n);
-print p($$permalinker{'introMsg'});
-# print p($$permalinker{'testingMsg'});
-print qq(<div class="permalink-box">\n);
-
-# !!! Could put the form into permalinker.yml.
-print start_form(-method=>"GET", -action=>$$permalinker{'permalinkerURL'}),
-   ('URL: ',
-   textfield(-size => 40, -name=>'url'));
-print qq(<input type="submit" value="Make a safe York permalink">);
-print end_form;
+#my $mainContent = $$template{'mainContent_start'};
+$mainContent =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
+$mainContent .= qq(<h1>$$permalinker{'h1'}</h1>\n);
+$mainContent .= p($$permalinker{'introMsg'});
+$mainContent .= $$permalinker{'form'};
 
 if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
 
@@ -136,8 +156,8 @@ if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
 if ($permalink) {
 
     $permalink =~ s|\\\?|\?|; # Unescape the ?.
-    print p($message);
-    print qq(<div class="permalink-generated"><a href="$permalink">$permalink</a> </div>);
+    $mainContent .=  p($message);
+    $mainContent .=  qq(<div class="permalink-generated"><a href="$permalink">$permalink</a> </div>);
 
 }
 
@@ -147,25 +167,19 @@ if ($permalink) {
 foreach my $vendor (keys %{$permalinker}) {
 
     if ($urlToPermify =~ m|$vendor|i) {
-	print "<p>\n";
+	$mainContent .=  "<p>\n";
 	if ($$permalinker{$vendor}{'helpAnchor'}) {
-	    print qq(This is a $$permalinker{$vendor}{'name'} link. );
-	    print qq(We have <a href="$$permalinker{'helpUrl'}#$$permalinker{$vendor}{'helpAnchor'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
+	    $mainContent .=  qq(This is a $$permalinker{$vendor}{'name'} link. );
+	    $mainContent .=  qq(We have <a href="$$permalinker{'helpUrl'}#$$permalinker{$vendor}{'helpAnchor'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
 	}
-	print "</p>\n";
+	$mainContent .=  "</p>\n";
     }
 
 }
 
-print "</div>\n";
+$mainContent .=  "</div>\n";
 
-print $$template{'mainContent_end'};
+$html =~ s/::MAIN_CONTENT::/-------- $mainContent --------/;
 
-my $footerHTML = get $$template{'footerURL'};
-unless (defined $footerHTML) {
-    print "<p>Error retrieving $$template{'footerURL'}</p>\n";
-    die "Error retrieving $$template{'footerURL'}";
-}
-print $footerHTML;
+print $html;
 
-print $$template{'body_end'};

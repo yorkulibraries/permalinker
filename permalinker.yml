@@ -23,77 +23,21 @@ ezproxy: ezproxy.library.yorku.ca
 eresolverURL: http://www.library.yorku.ca/eresolver/\?id=
 
 leftnav: | 
-  <p> <img width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/Catalogue/index.htm">CATALOGUE</a><br
-  /> <img width="170" vspace="1" hspace="0" height="1" border="0"
-  align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
-  width="5" hspace="2" height="9" border="0" alt="small arrow image"
-  src="http://www.library.yorku.ca/assets/arrow.gif" /> <a
-  class="anavitem"
-  href="http://www.library.yorku.ca/ccm/Home/eResources/index.htm">eRESOURCES</a><br
-  /> <img width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/eResources/FindBySubject.htm">Find
-  by Subject</a><br /> <img width="5" hspace="2" height="9" border="0"
-  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/eResources/FindByTitle.htm">Find
-  by Title</a><br /> <img width="5" hspace="2" height="9" border="0"
-  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/eResources/RemoteAccess.htm">Remote
-  Access</a><br /> <img width="5" hspace="2" height="9" border="0"
-  alt="" src="http://www.library.yorku.ca/assets/spacer.gif" /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/cgi-bin/permalinker">Permalinks</a><img width="170" vspace="1" hspace="0" height="1"
-  border="0" align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /><img width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/Services/index.htm">SERVICES</a><br
-  /> <img width="170" vspace="1" hspace="0" height="1" border="0"
-  align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/ResearchAndInstruction/index.htm">HELP
-  WITH RESEARCH</a><br /> <img width="170" vspace="1" hspace="0"
-  height="1" border="0" align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/Hours/index.htm">LIBRARY
-  HOURS</a><br /> <img width="170" vspace="1" hspace="0" height="1"
-  border="0" align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /><br /> <img
-  width="5" hspace="2" height="9" border="0" alt=""
-  src="http://www.library.yorku.ca/assets/spacer.gif" /> <a
-  class="navitem"
-  href="http://www.library.yorku.ca/ccm/Home/About/index.htm">YORK
-  LIBRARIES</a><br /> <img width="170" vspace="1" hspace="0"
-  height="1" border="0" align="top" alt=""
-  src="http://www.library.yorku.ca/assets/pixelgrey.gif" /></p><a
-  href="/ccm/Home/VirtualReference/askalibrarian.htm"><img border="0"
-  alt="Ask A Librarian" src="/assets/askalibrarian.gif"/></a>
+  <ul>
+  <li> <a href="/">Links here</a> </li>
+  </ul>
 
 breadcrumbs: |
   <a href="/">York University Libraries</a> &gt;
   <a href="/ccm/Home/eResources/">eResources</a> &gt;
   Permalinks
+
+form: |
+  <div class="permalink-box">
+  <form method="get" action="/cgi-bin/permalinker"> 
+  URL: <input type="text" name="url"  size="40" />
+  <input type="submit" value="Make a safe York permalink">
+  </form></div>
 
 introMsg: |
   <p> When you link to an article you want a URL (Uniform Resource Locator) that will remain active and usable over time. That's called a <strong>permalink</strong> (or persistent or stable link). For things on the public web, this usually isn't a problem because you can use the URL in the address bar of your web browser.  For journal articles and other things the library pays for, you will have to modify the link for off-campus access. </p>

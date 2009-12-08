@@ -84,6 +84,7 @@ close FILE;
 
 $html =~ s/::PAGE_TITLE::/$$permalinker{'title'}/;
 $html =~ s/::LEFT_NAV::/$$permalinker{'leftnav'}/;
+$html =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
 
 my $query = new CGI;
 
@@ -95,8 +96,7 @@ print header;
 
 my $mainContent = "";
 
-#my $mainContent = $$template{'mainContent_start'};
-$mainContent =~ s/::BREADCRUMBS::/$$permalinker{'breadcrumbs'}/;
+# my $mainContent = $$template{'mainContent_start'};
 $mainContent .= qq(<h1>$$permalinker{'h1'}</h1>\n);
 $mainContent .= p($$permalinker{'introMsg'});
 $mainContent .= $$permalinker{'form'};

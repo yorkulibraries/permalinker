@@ -24,7 +24,15 @@ eresolverURL: http://www.library.yorku.ca/eresolver/\?id=
 
 leftnav: | 
   <ul>
-  <li> <a href="/">Links here</a> </li>
+  <li> <a href="/ccm/Home/eResources/">eRESOURCES</a></li>
+  <li> <a href="/ccm/Home/eResources/FindBySubject">Find by Subject</a></li>
+  <li> <a href="/ccm/Home/eResources/FindByTitle">Find by Title</a></li>
+  <li> <a href="/ccm/Home/eResources/RemoteAccess">Remote Access</a></li>
+  <li> <a href="/cgi-bin/permalinker">Permalinker</a></li>
+  <li> <a href="/ccm/Home/Services/">SERVICES</a></li>
+  <li> <a href="/ccm/Home/ResearchAndInstruction/">HELP WITH RESEARCH</a></li>
+  <li> <a href="/ccm/Home/Hours/">LIBRARY HOURS</a></li>
+  <li> <a href="/ccm/Home/About/">YORK LIBRARIES</a></li>
   </ul>
 
 breadcrumbs: |

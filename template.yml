@@ -1,7 +1,7 @@
 # York University Libraries web site templates
 
 # Path to all the little config files we'll use
-templatesPath: /var/www/cms-html/template/2009/include/
+templatesPath: /var/www/html/cms-html/template/2009/include/
 pageTemplate: page-template.txt
 
 internalbanner: internalbanner.inc

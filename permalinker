@@ -101,6 +101,8 @@ $mainContent .= qq(<h1>$$permalinker{'h1'}</h1>\n);
 $mainContent .= p($$permalinker{'introMsg'});
 $mainContent .= $$permalinker{'form'};
 
+$mainContent =~ s/::URL::/$urlToPermify/;
+
 if ($urlToPermify =~ m|http://[\w\.]*$$permalinker{'ezproxy'}/.*|) {
 
     # E.g. http://dx.doi.org.ezproxy.library.yorku.ca/10.1016/j.jelekin.2007.04.002

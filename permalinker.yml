@@ -43,18 +43,13 @@ breadcrumbs: |
 form: |
   <div class="permalink-box">
   <form method="get" action="/cgi-bin/permalinker"> 
-  URL: <input type="text" name="url"  size="40" />
+  URL: <input type="text" name="url"  size="40" value="::URL::"/>
   <input type="submit" value="Make a safe York permalink">
   </form></div>
 
 introMsg: |
-  <p> When you link to an article you want a URL (Uniform Resource Locator) that will remain active and usable over time. That's called a <strong>permalink</strong> (or persistent or stable link). For things on the public web, this usually isn't a problem because you can use the URL in the address bar of your web browser.  For journal articles and other things the library pays for, you will have to modify the link for off-campus access. </p>
-  <h2>Use a DOI if there is one</h2>
-  <p> The most frequently used permanent link is the <a href="http://www3.interscience.wiley.com/doiinfo.html">Digital Object Identifier</a> (DOI). A DOI is a standardized method for identifying an electronic object. DOIs often appear in the <strong>citation</strong> or the <strong>abstract</strong> of an article and will start with the number 10 followed by a decimal and a series of numbers and letters: e.g. 10.1038/nature02999. </p>
-  <h2>Other types of permanent links</h2>
-  <p>Some database providers (e.g. ProQuest) and publishers (e.g. American Institute of Physics) provide their own permanent links to articles in formats different from DOIs. These can often be found with the citation information for an article.  For example, use "Copy link" when looking for a permalink for <a href="http://ezproxy.library.yorku.ca/login?url=http://proquest.umi.com/pqdweb?did=974437851&amp;sid=1&amp;Fmt=2&amp;clientId=5220&amp;RQT=309&amp;VName=PQD">something in a Proquest database.</a></p>
-  <p>We have many <a href="/ccm/Home/eResources/permanentlinks">examples of where to look for permalinks in journals and article databases</a>.</p>
-  <p>Once you have a DOI or permalink, you need to make sure that York people have full access to it even when they're off campus. Copy the DOI or permalink URL into the box and we'll make sure it's a safe York permalink that will work for all York people wherever they are.</p>
+  <p><a href="http://researchguides.library.yorku.ca/eresources">Linking to Library Resources</a> is our new, complete guide to making York-friendly permalinks to articles, ebooks, and other library resources.</p>
+  <p>Once you have a DOI or permalink, you need to make sure that York people have full access to it even when they're off campus. Copy the DOI or permalink URL into the box and we'll make sure it's a safe York permalink that will work for all York people wherever they are. See the full guide for more about all this.</p>
 
 testingMsg: |
   <div class="permalink-box">

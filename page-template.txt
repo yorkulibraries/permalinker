@@ -48,6 +48,10 @@
 
 <div id="content">
 
+<div id="breadcrums">
+::BREADCRUMBS::
+</div>
+
 ::MAIN_CONTENT::
 
 <div id="content_footer" style="margin: 0; text-align: center;"><!-- Could put the footer here, above the York footer -->

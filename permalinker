@@ -161,25 +161,28 @@ if ($permalink) {
 
 }
 
+# Commented out 16 Sep 2011
+# Now that the permalinking to articles stuff has moved into
+# LibGuides this has all changed.  Just leave it out.
+#
 # Check to see if there's any special help information for this
 # vendor.
 # TODO Make elegant.
-foreach my $vendor (keys %{$permalinker}) {
+# foreach my $vendor (keys %{$permalinker}) {
 
-    if ($urlToPermify =~ m|$vendor|i) {
-	$mainContent .=  "<p>\n";
-	if ($$permalinker{$vendor}{'helpAnchor'}) {
-	    $mainContent .=  qq(This is a $$permalinker{$vendor}{'name'} link. );
-	    $mainContent .=  qq(We have <a href="$$permalinker{'helpUrl'}#$$permalinker{$vendor}{'helpAnchor'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
-	}
-	$mainContent .=  "</p>\n";
-    }
+#     if ($urlToPermify =~ m|$vendor|i) {
+# 	$mainContent .=  "<p>\n";
+# 	if ($$permalinker{$vendor}{'helpAnchor'}) {
+# 	    $mainContent .=  qq(This is a $$permalinker{$vendor}{'name'} link. );
+# 	    $mainContent .=  qq(We have <a href="$$permalinker{'helpUrl'}#$$permalinker{$vendor}{'helpAnchor'}">more help on $$permalinker{$vendor}{'name'} permalinks</a>. );
+# 	}
+# 	$mainContent .=  "</p>\n";
+#     }
 
-}
+# }
 
-$mainContent .=  "</div>\n";
+$mainContent .=  "</div></div>\n";
 
 $html =~ s/::MAIN_CONTENT::/$mainContent/;
 
 print $html;
-
